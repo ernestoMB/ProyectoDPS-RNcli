@@ -1,23 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View, TextInput, Image, StyleSheet, ScrollView, SafeAreaView, Alert } from "react-native";
-import { Registrarse, Btn2 , Regresar} from "../componentes/botones";
+import { Registrarse, Btn2 , Regresar, CrearCuenta} from "../componentes/botones";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { firebase } from "@react-native-firebase/firestore";
+
 
 const LoginScreen = ({ navigation }) => {
 
+
   const [state, setState] = useState({
-    nombre:'',
-    apellido:'',
     email:'',
     contraseña:'',
-    edad:'',
-    altura:'',
-    peso:'',
   })
 
   const CapturarDatos = (campo, value)=>{
     setState({...state, [campo]: value});
   };
+
+
+  /*const auth = firebase.auth();
+  const handleSingUp=()=>{
+    auth.createUserWithEmailPassword(state.email, state.contraseña)
+    .then(userCredentials =>{
+      const user = userCredentials.user;
+      console.log(user.email)
+    })
+    .catch(error => alert(error.message))
+  }*/
+
+
+
+  const navi = useNavigation()
+  const SignUp = ()=>{
+    navi.navigate("SignUp")
+  }
 
   const LoginUsuario= () =>{
     if(state.email==="" || state.contraseña==="")
@@ -25,19 +42,15 @@ const LoginScreen = ({ navigation }) => {
       Alert.alert("Campos vacios")
     }
     else{
-      //await firebase.collection('usuario').add({
-       // nombre: state.nombre,
-       // apellido: state.apellido,
-       // edad: state.edad,
-       // altura: state.altura, 
-        //peso: state.peso,  
-       // email: state.email,
-      //  contraseña: state.contraseña,    
-     // })
-      Alert.alert("Inicio de sesion exitoso")
-      
     }
   }
+
+  
+
+
+
+
+ 
 
 
 
@@ -58,10 +71,15 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <Text></Text><Text></Text>
       <SafeAreaView style={styles.container}>
-        <Registrarse text ="Iniciar Sesion" onPress={()=>AgregarUsuario()} />
+        <Registrarse text ="Iniciar Sesion" onPress={()=>LoginUsuario()} />
         <Text></Text>
       </SafeAreaView>
-      <Text></Text><Text></Text>
+      <Text></Text>
+      <SafeAreaView style={styles.container}>
+        <CrearCuenta text ="Crear Cuenta"  onPress={()=>SignUp()}/>
+        <Text></Text>
+      </SafeAreaView>
+      <Text></Text>
       <View style={styles.container}>
         <View style={{flexDirection:'row'}}>
           <Image style={styles.icon} source={require('../img/gg.png')}></Image>

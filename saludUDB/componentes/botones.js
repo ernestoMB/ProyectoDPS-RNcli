@@ -1,10 +1,22 @@
 import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 
+
 export function Registrarse(props){
     const{ onPress, text } = props;
     return(
         <TouchableOpacity style={{...styles.btn, backgroundColor:'#00ab4c'}}
+            onPress={onPress}>
+            <Text style={{...styles.btnText,color:'white'}}>
+                {text}
+            </Text>
+        </TouchableOpacity>
+    )
+}
+export function CrearCuenta(props){
+    const{ onPress, text } = props;
+    return(
+        <TouchableOpacity style={{...styles.btn, backgroundColor:'#21b9ff'}}
             onPress={onPress}>
             <Text style={{...styles.btnText,color:'white'}}>
                 {text}

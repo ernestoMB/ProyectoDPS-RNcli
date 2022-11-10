@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //pantallas de autentificacion
 import LoginScreen from './authscreens/LoginScreen';
@@ -140,8 +141,14 @@ export default function NavigationApp() {
       <Stack.Screen
         name="Registro"
         options={{animationEnabled: false, header: () => null}}
+        component={LoginScreen}
+      />
+      <Stack.Screen
+        name="SignUp"
+        options={{animationEnabled: false, header: () => null}}
         component={RegisterScreen}
       />
+      
       </Stack.Navigator>
     </NavigationContainer>
   );
